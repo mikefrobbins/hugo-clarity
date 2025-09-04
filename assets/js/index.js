@@ -321,7 +321,7 @@ function fileClosure(){
 
   (function AltImage() {
     let post = elem('.post_content');
-    let images = post ? post.querySelectorAll('img') : false;
+    let images = post ? post.querySelectorAll('img') : [];
     images ? populateAlt(images) : false;
 
     images.forEach((image) => image.addEventListener('load', (e) => {
@@ -394,8 +394,12 @@ function fileClosure(){
   })();
 
   (function navToggle() {
+    elems('.nav_parent').forEach((link) => link.addEventListener('mouseenter', function(event) {
+      event.target.children[0].classList.add('nav_open')
+    }));
+
     elems('.nav_parent').forEach((link) => link.addEventListener('mouseleave', function(event) {
-      modifyClass(event.target.children[0], 'nav_open');
+      event.target.children[0].classList.remove('nav_open')
     }));
 
     doc.addEventListener('click', function(event){
